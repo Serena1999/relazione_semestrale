@@ -173,7 +173,7 @@ Variando la resistenza e, conseguentemente, la differenza di potenziale in
 ingresso, \`e stato possibile calcolare media, deviazione standard campione
 e deviazione standard dalla media relative a ciascuna tensione per 
 un gruppo di 10000 misure effettuate con \verb+Teensy+ (si veda il 
-\href{https://github.com/LucaCiucci/relaz_seme/blob/master/sketches/teensy_calib/teensy_calib.ino}{relativo sketch}).
+\href{https://github.com/Serena1999/relazione_semestrale/blob/master/sketches/teensy_calib/teensy_calib.ino}{relativo sketch}).
 Il centrale del potenziometro e la massa sono state, inoltre, collegate ad un
 multimetro digitale, in modo da poter associare la tensione misurata in
 Volt alla corrispondente lettura digitalizzata dal MCU. Abbiamo assunto come
@@ -225,7 +225,7 @@ specifiche di \verb+Teensy 3.2+, sappiamo che lo scostamento dall'andamento
 lineare pu\`o essere quantificato col $7 \%$ della lettura in digit.\\
 Per maggiori informazioni riguardo alle stime delle incertezze nelle 
 conversioni si rimanda direttamente al 
-\href{https://github.com/LucaCiucci/relaz_seme/blob/master/Cartella_fit/funzioni.py}
+\href{https://github.com/Serena1999/relazione_semestrale/blob/master/Cartella_fit/funzioni.py}
 {relativo script}.
 
 %================================
@@ -234,7 +234,7 @@ conversioni si rimanda direttamente al
 \subsection{Acquisizione dati}
 Per ciascun valore scelto della resistenza $R1$ si \`e acquisita una presa 
 dati automatizzata tramite una 
-\href{https://github.com/LucaCiucci/relaz_seme/blob/master/sketches/teensy_differenziale_definitivo/teensy_differenziale_definitivo.ino}
+\href{https://github.com/Serena1999/relazione_semestrale/blob/master/sketches/teensy_differenziale_definitivo/teensy_differenziale_definitivo.ino}
 {routine} programmata in \verb+Teensy+: il condensatore viene caricato ad una
 tensione prefissata; quando il MCU misura questo valore prestabilito,
 invia il segnale su $T1$ che avvia l'acquisizione sincronizzata e si attende
@@ -308,7 +308,7 @@ nei grafici \ref{fig: sck_lin}, in scala lineare, e \ref{fig: sck_log}
 in scala semilogaritmica. 
 
 Per gli script si rimanda alla 
-\href{https://github.com/LucaCiucci/relaz_seme/tree/master/Cartella_fit}
+\href{https://github.com/Serena1999/relazione_semestrale/tree/master/Cartella_fit}
 {cartella}, dove \verb+run.py+ esegue la corretta sequenza e \verb+config.py+
 definisce i parametri fondamentali.
 
@@ -635,7 +635,7 @@ L’algoritmo \`e computazionalmente intensivo e richiede una corretta gestione
 della memoria per evitare bolle di allocazione. Dunque \`e stato implementato
 in \verb'C++' per praticit\`a e richiamato all’interno degli script (per dettagli si 
 rimanda ai 
-\href{https://github.com/LucaCiucci/relaz_seme/tree/master/Cartella_fit/filter_src}{sorgenti}).
+\href{https://github.com/Serena1999/relazione_semestrale/tree/master/Cartella_fit/filter_src}{sorgenti}).
 Nelle figure di esempio sono mostrati i dati selezionati dall’algoritmo
 (in nero) ed i dati scartati (in arancio). 
 
