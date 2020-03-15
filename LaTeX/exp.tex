@@ -1,0 +1,186 @@
+\documentclass{article}[a4paper, oneside ,11pt]
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm, thmtools, amsfonts}
+\usepackage{calc}
+\usepackage[nochapters,pdfspacing]{classicthesis}
+%\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{caption}
+\usepackage[italian]{babel}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{siunitx}
+\usepackage[siunitx]{circuitikz}
+\usepackage{titling}
+\usepackage{lmodern}
+\usepgfplotslibrary{external} 
+\tikzexternalize
+
+\lstset{
+basicstyle=\ttfamily,
+columns=fullflexible,
+keepspaces=true,
+}
+
+\graphicspath{{./figs/}}
+\makeatletter
+\def\input@path{{./figs/}}
+%or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
+\makeatother
+
+\input{../../Template/math}
+
+\geometry{a4paper, left=30mm, right=30mm, top=30mm, bottom=30mm}
+\title{Diodo PN e8 2019/20}
+\author{Bernardo Tomelleri}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Resistenza del Diodo}
+Consideriamo il nostro multimetro digitale come un ottimo voltmetro\footnote{Nel senso di dotato di resistenza in ingresso molto alta $R_{\rm in} = 10 \; \si{\mega\ohm}$ nominali}: dunque supponiamo che, per far leva su questo, misuri indirettamente la resistenza di un componente imprimendo su di esso una corrente $I_{\rm in}$ generata (dunque nota) dallo strumento stesso, quindi misurando la caduta di tensione che si determina ai capi del carico resistivo considerato $R_{\rm L}$. Per materiali ohmici la misura di resistenza si ottiene appunto invertendo la legge di Ohm:
+\begin{equation}\label{eq:Ohm}
+I_{\rm in} = \frac{\Delta V_{\rm mis}}{R_{\rm L}} \implies R_{\rm L} = \frac{\Delta V_{\rm mis}}{I_{\rm in}}
+\end{equation}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0)
+	to[R=$R_{\rm L}$, *-*] (0,2) % The resistor	
+	to[short] (2,2)
+	to[ohmmeter] (2,0)
+	to[short] (0,0);
+	to[short] (2,0);
+	to[short] (4,0);
+\end{circuitikz}
+\begin{circuitikz}
+\draw (0,0)
+	to[dcisource, i=$I_{\rm in}$] (0,2) % The current source
+	to[short] (2,2)
+	to[R=$R_{\rm L}$, *-*] (2,0)
+	to[short] (0,0);
+	\draw (2,2)
+	to[short] (5,2)
+	to[voltmeter, v=$\Delta V_{\rm mis}$] (5,0)
+	to[short] (2,0);
+	to[short] (4,0);
+\end{circuitikz}
+\end{center}
+Si nota subito dalla \eqref{eq:Ohm} come, per misurare cadute di tensione perlomeno dello stesso ordine di grandezza, al crescere della resistenza si debbano far scorrere correnti sempre meno intense su $R_L$, in quanto:
+\begin{equation}
+\Delta V_{\rm const.} = R_\nearrow \; I_\searrow
+\end{equation}
+A conferma di questo si possono misurare con un amperometro le correnti di prova iniettate dall'ohmmetro, che quindi misurerà a sua volta la resistenza interna $R_{\rm in}$ del primo multimetro in serie alla corrente, come illustrato nel seguente schema e riportato nella tabella \ref{tab: res}:
+\begin{center}
+\begin{circuitikz}
+\draw (0,0)
+	to[dcisource, i=$I_{\rm in}$] (0,3) % The current source
+	to[short] (3,3)
+	to[R=$R_{\rm in}$, *-*] (3,1.5)
+	to[ammeter, *-*] (3,0)
+	to[short] (0,0);
+	\draw (3,3)
+	to[short] (5,3)
+	to[voltmeter, l=$\Delta V_{\rm mis}$] (5,0)
+	to[short] (3,0);
+	to[short] (4,0);
+\end{circuitikz}
+\end{center}
+Se la scala di riferimento di d.d.p. del multimetro è (sperabilmente) quella che garantisce la massima risoluzione sulla misura, dunque la più bassa: $200 \si{\milli\volt}$, allora la misura di una resistenza a fondo scala $200 \si{\mega\ohm}$ richiederebbe correnti dell'ordine di $1 \si{\nano\ampere}$, due ordini di grandezza inferiori alla sensibilità dello strumento, $I_{\rm min}= 0.1 \si{\micro\ampere}$. Nell'ultima scala allora il multimetro, che sta misurando -contemporaneamente- intensità di corrente e tensione, aumenta la propria scala di riferimento\footnote{La minima d.d.p. per cui, alla scala di $200 \si{\mega\ohm}$, passano correnti apprezzabili dal tester digitale: $\frac{20 \; \si{\volt}}{200 \si{\mega\ohm}} = 0.1 \si{\micro\ampere} = I_{\rm min}$} a $20$ V  e inietta una corrente maggiore nel componente, così da aumentare la propria portata, al costo di una ridotta precisione e prontezza di risposta.
+\begin{table}[!htbp]
+	\begin{center}
+		\begin{tabular}{cc|cc}
+		\toprule	
+		f.s. [$\Omega$]  & R [$\Omega$] & f.s. $[\si{\micro\A}]$ & I $[\si{\micro\A}]$							 \\
+		\midrule
+		\midrule
+		200 $\Omega$ &	$99.9\pm 0.8 \; \Omega$ & $2\si{\milli\A}$ & $0.355\pm 0.002\; \si{\milli\A}$			 \\
+		2 k$\Omega$  &	$0.999\pm 0.008 \; \si{\kilo\ohm}$	& $200\si{\micro\A}$ & $184\pm 1.4\; \si{\micro\A}$  \\
+		20 k$\Omega$  &	$1.000\pm 0.013 \; \si{\kilo\ohm}$	& $200\si{\micro\A}$ & $46.6\pm 0.25\; \si{\micro\A}$\\
+		200 k$\Omega$ & $10.00\pm 0.13 \; \si{\kilo\ohm}$ 	& $20\si{\micro\A}$	 & $5.03\pm 0.11\; \si{\micro\A}$\\
+		2 M$\Omega$   & $0.010\pm 0.001 \; \si{\mega\ohm}$ & $20\si{\micro\A}$	 & $0.55\pm 0.05\; \si{\micro\A}$\\
+		20 M$\Omega$  & $0.01\pm 0.02 \; \si{\mega\ohm}$	& $20\si{\micro\A}$	 & $0.05\pm 0.05\; \si{\micro\A}$\\
+		200 M$\Omega$ & $1.1\pm 0.2 \; \si{\mega\ohm}$ 	& $20\si{\micro\A}$	 & $2.93\pm 0.08\; \si{\micro\A}$	 \\
+		\bottomrule        
+		\end{tabular}
+		\caption{Misure dell'intensità di corrente al variare del fondo scala dell'ohmmetro \label{tab: res}}
+	\end{center}
+\end{table}
+Poiché a trovarsi tra i puntali dell'ohmmetro ora non è più un componente facilmente modellabile come carico resistivo, ma un diodo in silicio a giunzione bipolare PN, questo metodo di misura, che presuppone una risposta (sotto forma di differenza di potenziale) di tipo lineare al passaggio di corrente, fornisce risultati di interpretazione non immediata in termini di grandezze fisiche.\\
+\begin{center}
+\begin{circuitikz}
+\draw (0,0)
+	to[dcisource, i=$I_{\rm in}$] (0,2) % The current source
+	to[short] (2,2)
+	to[Do, *-*] (2,0)
+	to[short] (0,0);
+	\draw (2,2)
+	to[short] (4,2)
+	to[voltmeter, l=$\Delta V_{\rm mis}$] (4,0)
+	to[short] (2,0);
+	to[short] (4,0);
+\end{circuitikz}
+\end{center}
+Tralasciamo volutamente il caso "semplice" in cui il diodo invertito non lascia passar corrente (almeno entro il regime operativo, in cui ai capi del diodo si trovi una differenza $<100$ [V] $= V_{\rm BR}$) per cui effettivamente la resistenza misurata del multimetro arriva sempre a fondo scala, come ci si aspetterebbe per un circuito/interruttore aperto.\\
+Quando si esegue la stessa misura con il diodo orientato nel verso della corrente, si osserva come, effettivamente la resistenza che il diodo oppone al passaggio della corrente dipende dalle condizioni di lavoro in cui questo viene a trovarsi. In particolare, al diminuire del fondo scala della resistenza, dunque all'aumentare dell'intensità di corrente impressa, man mano che il diodo si avvicina al regime di conduzione diminuisce la propria resistenza, come si vede geometricamente nella curva caratteristica \ref{plt:did_out} dalla diminuzione della cotangente del triangolo con cateti $I$ e $\Delta V$ e dalle misure riportate nella tabella \ref{tab: did}.\\
+\begin{table}[!htbp]
+	\begin{center}
+		\begin{tabular}{lr}
+		\toprule	
+		f.s. [$\Omega$]  & R [$\Omega$]						\\
+		\midrule
+		\midrule
+		200 k$\Omega$ & $136.6 \pm 1.1 \; \si{\kilo\ohm}$	\\
+		2 M$\Omega$   & $0.668 \pm 0.007 \;  \si{\mega\ohm}$\\
+		20 M$\Omega$  & $2.93 \pm 0.03 \; \si{\mega\ohm}$   \\
+		200 M$\Omega$ & $1.1 \pm 0.2 \;  \si{\mega\ohm}$	\\
+		\bottomrule        
+		\end{tabular}
+		\caption{Valori della resistenza del diodo misurati al variare del fondo scala del multimetro \label{tab: did}}
+	\end{center}
+\end{table}
+Per quanto visto prima, non sorprende che la misura alla scala $200 \si{\mega\ohm}$ costituisca un'eccezione alla regola delle prime 4 letture: la maggiore corrente impressa dà origine a questa nuova diminuzione della caduta di potenziale/resistenza misurata ai capi del diodo. Il fatto che la misura di resistenza del diodo e quella del resistore interno al tester da $10 \si{\kilo\ohm}$ diano lo stesso risultato di $1.1 \pm 0.2 \;  \si{\mega\ohm}$ è indice del fatto che entrambe non sono apprezzabili nella scala da $200 \si{\mega\ohm}$. Ingenuamente direi allora che come misure non abbiano particolare significato e non saprei trarvi altre conclusioni, in quanto non mi risulta chiaro neanche quale sia l'incertezza ad esse associata. =(
+\section{Curva caratteristica del diodo}
+Da un \emph{fit} con la legge di Shockley:
+\begin{lstlisting}
+def sck(V, I0, VT):
+    return I0*(np.exp(V/(VT)) -1)
+\end{lstlisting}
+Lasciando liberi entrambi i parametri $I_{0}$ e $V_{T}$ si ottengono i valori:
+\begin{align*}
+I_{0} &= 4.1 \pm 0.5 \ \; \rm nA \\
+V_{T} &= 47.7 \pm 0.5 \; \rm mV \\  
+\rm{norm\_cov}_{(I_{0}, V_{T})} &= 0.99 \\ 
+\chi^2 &= 332/255 \\
+\rm{abs\_sigma} &= \rm False
+\end{align*}
+Ed il grafico \ref{plt:did}\\
+\begin{figure}[!htb]
+	\centering 
+ 		\scalebox{0.9}{\input{./did.pgf}}
+ 	\caption{Fit della corrente rispetto alla d.d.p. $V_2$ in scala lineare \label{plt:did}}
+\end{figure}
+Da un secondo \emph{fit}, con un lo stesso modello,
+Lasciando liberi i parametri $I_{0}$ e $V_{T}$, propagando gli errori sulla variabile indipendente, rimuovendo i punti che assumono andamento "a scalino" e gli altri outlier a più di 3 barre d'errore, si ottengono i valori:
+\begin{align*}
+I_{0} &= 3.9 \pm 0.4 \; \rm nA \\
+V_{T} &= 47.6 \pm 0.4 \; \rm mV \\  
+\rm{norm\_cov}_{(I_{0}, V_{T})} &= 0.99 \\ 
+\chi^2 &= 216/243 \\
+\rm{abs\_sigma} &= \rm False
+\end{align*}
+Ed il grafico \ref{plt:did_out}:\\
+\begin{figure}[!htb]
+	\centering 
+ 		\scalebox{0.9}{\input{./did_out.pgf}}
+ 	\caption{Fit della corrente rispetto alla d.d.p. $V_2$ in scala lineare \label{plt:did_out}}
+\end{figure}
+In entrambi casi impostando $\rm{abs\_sigma} = \rm False$ in quanto l'errore non statistico è predominante sulle misure.
+\subsection{Nota sul metodo di fit}
+Per determinare i parametri ottimali e le rispettive varianze si \`e implementato un metodo di fit basato sui minimi quadrati mediante la funzione \emph{curve\_fit} di Python.
+\end{document}

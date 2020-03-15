@@ -1,0 +1,14 @@
+#testo
+La misura di R1 alt. è stata effettuata con un metodo alternativo a quello dei 4 fili.
+Attraverso l'utilizzo di un alimentatore da laboratorio in DC (\Delta V_max 30 V; I_max = 5 A) impostiamo la corrente I e la ddp \Delta V che volgliamo far scorrere all'interno della resistenza, scelti attraverso la legge dell'effetto Joule, in modo da non bruciarla.
+Selezionati i valori li andiamo a misurare attraverso 2 multimetri digitali, uno impostato come voltmetro e l'altro come amperometro, così da avere delle misure dirette dei valori di V e I.
+Succesivamente i valori misurati vengono usati per ottenere una misura indiretta della resistenza R1 attraverso la legge di Ohm.
+Come si evice dalla tabella, questo metodo porta ad avere errori che sono molto più grandi rispetto al metodo dei 4 fili. 
+
+#colonna da aggiungere alla tabella in LaTeX
+R1 alt [\Omega]
+0.22 +- 0.01
+2.19 +- 0.03
+21.6 +- 0.2
+210.6 +- 0.8
+2140 +- 23

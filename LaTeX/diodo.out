@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Introduzione}{}% 1
+\BOOKMARK [1][-]{section.2}{Cenni Teorici}{}% 2
+\BOOKMARK [1][-]{section.3}{Metodo e apparato sperimentale}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Apparato}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Calibrazione}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Acquisizione dati}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Analisi dati e Risultati}{}% 7
+\BOOKMARK [1][-]{section.5}{Conclusioni}{}% 8
+\BOOKMARK [1][-]{section.6}{Appendice A: Misura delle resistenze R1}{}% 9
+\BOOKMARK [1][-]{section.7}{Appendice B: Filtraggio Dati}{}% 10
+\BOOKMARK [2][-]{subsection.7.1}{Introduzione}{section.7}% 11
+\BOOKMARK [2][-]{subsection.7.2}{Procedimento}{section.7}% 12
+\BOOKMARK [2][-]{subsection.7.3}{Var\(y\)}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.4}{Filtro outliers}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.5}{Filtro dati non significativi}{section.7}% 15
+\BOOKMARK [1][-]{section.8}{Appendice C: Metodo di fit}{}% 16
+\BOOKMARK [2][-]{subsection.8.1}{Nota sull'implementazione}{section.8}% 17
